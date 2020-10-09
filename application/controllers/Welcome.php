@@ -20,7 +20,11 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		//To load model 
+		$this->load->model('Authenticate');
+		$data=$this->Authenticate->getdata();
+		print_r($data);
+		$this->load->view('Home');
 	}
 	public function demo(){
 		echo "hello there!!!";
