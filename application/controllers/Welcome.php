@@ -21,12 +21,42 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		//To load model 
-		$this->load->model('Authenticate');
+		/*$this->load->model('Authenticate');
 		$data=$this->Authenticate->getdata();
-		print_r($data);
+		print_r($data);*/
+		// $this->load->helper("url");
+		 $this->load->helper("html");
 		$this->load->view('Home');
+		echo "hello";
 	}
 	public function demo(){
-		echo "hello there!!!";
+			$this->form_validation->set_rules('uname','Useer-name','required|alpha');
+			$this->form_validation->set_rules('ustate','State','required|alpha');
+			$this->form_validation->set_rules('ucity','City','required|alpha');
+			$this->form_validation->set_rules('umobile','Moblie','required');
+		$this->form_validation->set_rules('upass','Useer-password','required|max_length[12]');
+
+		if ($this->form_validation->run()) {
+			$uname=$this->input->post('uname');
+			$ustate=$this->input->post('ustate');
+			 $ucity=$this->input->post('ucity');
+			$umobile=$this->input->post('umobile');
+			$upass=$this->input->post('upass');
+			$this->load->model('signupmodel');
+			if($this->signupmodel->isvalidates($uname,$ustate,$ucity,$umobile,$upass)){
+				//logic correct
+				echo "data gya";
+			}
+			else{
+				//logic failed
+				// echo "data nhi gya";
+			$this->load->view('surveypanal');
+			}
+			// echo "Validation succesfull";
+		}
+		else {
+			$this->load->view('Home');
+
+		}
 	}
 }

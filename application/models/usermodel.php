@@ -7,7 +7,7 @@ class Usermodel extends CI_model{
 	
 		//$this->load->database();
 
-		//this is where condition
+		//this is where condition 
 		$this->db->where("id",1);
 
 		//this method is active record
